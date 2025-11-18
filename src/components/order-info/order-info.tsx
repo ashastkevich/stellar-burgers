@@ -17,7 +17,7 @@ export const OrderInfo: FC = () => {
   const ingredientsState = useSelector(getIngredientsSelector);
 
   useEffect(() => {
-    if (!profileOrders.orders.length) {
+    if (!profileOrders.length) {
       dispatch(getProfileOrders());
     }
     if (!feedState.orders.length) {
@@ -26,11 +26,11 @@ export const OrderInfo: FC = () => {
   }, [dispatch]);
 
   const orderData: TOrder | null =
-    profileOrders.orders.find((o) => String(o.number) === String(number)) ||
+    profileOrders.find((o) => String(o.number) === String(number)) ||
     feedState.orders.find((o) => String(o.number) === String(number)) ||
     null;
 
-  const ingredients: TIngredient[] = ingredientsState.ingredients;
+  const ingredients: TIngredient[] = ingredientsState;
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

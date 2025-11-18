@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { getIngredientsSelector } from '../../services/slices/ingredientsSlice';
 
 export const IngredientDetails: FC = () => {
   const {id} = useParams<{id: string}>();
-  const { ingredients, loading, error } = useSelector(getIngredientsSelector);
+  const ingredients = useSelector(getIngredientsSelector);
   const ingredientData = ingredients.find((ingredient) => ingredient._id === id);
 
   if (!ingredientData) {

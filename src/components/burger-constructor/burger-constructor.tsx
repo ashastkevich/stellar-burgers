@@ -4,8 +4,8 @@ import { BurgerConstructorUI } from '@ui';
 import { useSelector } from '../../services/store';
 import { getConstructorSelector, clearConstructor } from '../../services/slices/constructorSlice';
 import { useDispatch } from '../../services/store';
-import { getBurger, getOrdersSelector, clearOrderData } from '../../services/slices/ordersSlice';
-import { getUserSelector } from '../../services/slices/usersSlice';
+import { getBurger, clearOrderData, getOrdersRequestSelector, getOrdersDataSelector } from '../../services/slices/ordersSlice';
+import { getUserDataSelector } from '../../services/slices/usersSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -18,15 +18,14 @@ export const BurgerConstructor: FC = () => {
 
   const ingredientsIds = [constructorItems.bun?._id, ...constructorItems.ingredients.map(i => i._id)].filter(Boolean) as string[];
 
-  const orderState = useSelector(getOrdersSelector);
-  const orderRequest = orderState.orderRequest;
-  const orderModalData = orderState.orderData;
+  const orderRequest = useSelector(getOrdersRequestSelector);
+  const orderModalData = useSelector(getOrdersDataSelector);
 
-  const userState = useSelector(getUserSelector);
+  const userData = useSelector(getUserDataSelector);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    if (!userState.data) {
+    if (!userData) {
       navigate('/login', { state: { from: location } });
       return;
     }
@@ -53,8 +52,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  // return null;
 
   return (
     <BurgerConstructorUI

@@ -14,7 +14,7 @@ export const ProfileOrders: FC = () => {
     dispatch(getProfileOrders());
   }, [dispatch]);
 
-  const orders: TOrder[] = profileOrders.orders;
+  const orders: TOrder[] = profileOrders;
 
   return <ProfileOrdersUI orders={orders} />;
 };

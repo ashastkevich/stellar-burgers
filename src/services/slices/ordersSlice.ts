@@ -1,4 +1,4 @@
-import { orderBurgerApi } from "@api";
+import { orderBurgerApi, TNewOrderResponse } from "@api";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOrder } from "@utils-types";
 import { RootState } from "../store";
@@ -42,7 +42,7 @@ export const orderSlice = createSlice({
           state.error = action.error.message ?? null;
           state.orderRequest = false;
         })
-        .addCase(getBurger.fulfilled, (state, action: PayloadAction<any>) => {
+        .addCase(getBurger.fulfilled, (state, action: PayloadAction<TNewOrderResponse>) => {
           state.loading = false;
           state.orderRequest = false;
           state.orderData = action.payload?.order ?? null;
@@ -53,3 +53,5 @@ export const orderSlice = createSlice({
 export const { clearOrderData } = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;
 export const getOrdersSelector = (state: RootState) => state.order;
+export const getOrdersRequestSelector = (state: RootState) => state.order.orderRequest;
+export const getOrdersDataSelector = (state: RootState) => state.order.orderData;

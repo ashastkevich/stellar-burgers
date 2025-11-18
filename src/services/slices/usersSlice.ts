@@ -109,7 +109,7 @@ export const usersSlice = createSlice({
         state.data = null;
         state.isAuthChecked = true;
       })
-      .addCase(checkUserAuth.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(checkUserAuth.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.data = action.payload;
         state.loginUserRequest = false;
         state.isAuthenticated = true;
@@ -140,3 +140,7 @@ export const usersSlice = createSlice({
 export const { userLogout, authCheck } = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;
 export const getUserSelector = (state: RootState) => state.user;
+export const getUserDataSelector = (state: RootState) => state.user.data;
+export const getUserAuthSelector = (state: RootState) => state.user.isAuthenticated;
+export const getUserAuthCheckedSelector = (state: RootState) => state.user.isAuthChecked;
+export const getLoginUserErrorSelector = (state: RootState) => state.user.loginUserError;

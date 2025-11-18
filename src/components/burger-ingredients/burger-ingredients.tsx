@@ -2,11 +2,11 @@ import { useState, useRef, useEffect, FC } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { getIngredientsSelector } from '../../services/slices/ingredientsSlice';
 
 export const BurgerIngredients: FC = () => {
-  const { ingredients, loading, error } = useSelector(getIngredientsSelector);
+  const ingredients = useSelector(getIngredientsSelector);
 
 
   /** TODO: взять переменные из стора */

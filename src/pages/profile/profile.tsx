@@ -1,16 +1,17 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { useSelector } from '../../services/store';
-import { getUserSelector } from '../../services/slices/usersSlice';
+import { getUserDataSelector } from '../../services/slices/usersSlice';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
-  const userState = useSelector(getUserSelector);
+  const userData = useSelector(getUserDataSelector);
+
   
   const user = useMemo(() => ({
-    name: userState.data?.name || '',
-    email: userState.data?.email || ''
-  }), [userState.data?.name, userState.data?.email]);
+    name: userData?.name || '',
+    email: userData?.email || ''
+  }), [userData?.name, userData?.email]);
 
 
   const [formValue, setFormValue] = useState({

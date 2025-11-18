@@ -25,26 +25,28 @@ export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
-    extraReducers: (builder) => {
-      builder
-        .addCase(getFeeds.pending, (state) => {
-          state.loading = true;
-          state.error = null;
-        })
-        .addCase(getFeeds.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message ?? null;
-        })
-        .addCase(getFeeds.fulfilled, (state, action) => {
-          state.loading = false;
-          state.orders = action.payload.orders;
-          state.feed = {
-            total: action.payload.total,
-            totalToday: action.payload.totalToday
-          }
-        });
-    }
+  extraReducers: (builder) => {
+    builder
+      .addCase(getFeeds.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getFeeds.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? null;
+      })
+      .addCase(getFeeds.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload.orders;
+        state.feed = {
+          total: action.payload.total,
+          totalToday: action.payload.totalToday
+        }
+      });
+  }
 });
 
 export const feedReducer = feedSlice.reducer;
 export const getFeedsSelector = (state: RootState) => state.feeds;
+export const getFeedOrdersSelector = (state: RootState) => state.feeds.orders;
+export const getFeedsFeedSelector = (state: RootState) => state.feeds.feed;

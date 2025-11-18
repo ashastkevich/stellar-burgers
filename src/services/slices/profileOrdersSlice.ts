@@ -42,4 +42,4 @@ export const profileOrdersSlice = createSlice({
 });
 
 export const profileOrdersReducer = profileOrdersSlice.reducer;
-export const getProfileOrdersSelector = (state: RootState) => state.profileOrders;
+export const getProfileOrdersSelector = (state: RootState) => state.profileOrders.orders;

@@ -1,14 +1,15 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
-import { getUserSelector, register } from '../../services/slices/usersSlice';
+import { getLoginUserErrorSelector, register } from '../../services/slices/usersSlice';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const userState = useSelector(getUserSelector);
+  const userLoginError = useSelector(getLoginUserErrorSelector);
+
   
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -18,7 +19,7 @@ export const Register: FC = () => {
 
   return (
     <RegisterUI
-      errorText={userState.loginUserError || undefined}
+      errorText={userLoginError || undefined}
       email={email}
       userName={userName}
       password={password}
