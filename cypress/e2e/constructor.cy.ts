@@ -3,9 +3,7 @@ describe('Тест базовой функциональности', () => {
         cy.intercept('GET', '/api/ingredients', {
         fixture: 'ingredients.json'
         }).as('getIngredients');
-
-        cy.visit('/');
-
+        cy.visit('http://localhost:4000');
         cy.wait('@getIngredients');
     });
     it('добовление ингридиента в конструктор', () => {
@@ -51,7 +49,7 @@ describe('Создание заказа', () => {
       fixture: 'order.json'
     }).as('createOrder');
 
-    cy.visit('/');
+    cy.visit('http://localhost:4000');
 
     cy.wait('@getIngredients');
   });
