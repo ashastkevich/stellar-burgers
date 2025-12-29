@@ -6,7 +6,7 @@ import { RootState } from "../store";
 export const getProfileOrders = createAsyncThunk('getOrders', async () => await getOrdersApi()
 );
 
-type TProfileOrderState = {
+export type TProfileOrderState = {
   orders: TOrder[];
   feed: {};
   loading: boolean;
@@ -32,7 +32,7 @@ export const profileOrdersSlice = createSlice({
         })
         .addCase(getProfileOrders.rejected, (state, action) => {
           state.loading = false;
-          state.error = action.error.message ?? null;
+          state.error = (action.payload as string) ?? action.error?.message ?? null;
         })
         .addCase(getProfileOrders.fulfilled, (state, action) => {
           state.loading = false;

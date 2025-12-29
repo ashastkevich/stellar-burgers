@@ -7,7 +7,7 @@ export const getFeeds = createAsyncThunk('getFeed', async () =>
   getFeedsApi()
 );
 
-type TFeedState = {
+export type TFeedState = {
   orders: TOrder[];
   feed: {};
   loading: boolean;
@@ -33,7 +33,7 @@ export const feedSlice = createSlice({
       })
       .addCase(getFeeds.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? null;
+        state.error = (action.payload as string) ?? action.error?.message ?? null;
       })
       .addCase(getFeeds.fulfilled, (state, action) => {
         state.loading = false;

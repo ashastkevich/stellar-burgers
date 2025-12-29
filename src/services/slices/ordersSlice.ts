@@ -7,7 +7,7 @@ export const getBurger = createAsyncThunk('order/create', async (ingredientIds: 
   await orderBurgerApi(ingredientIds)
 );
 
-type TOrderState = {
+export type TOrderState = {
   loading: boolean;
   error: string | null;
   orderRequest: boolean;
